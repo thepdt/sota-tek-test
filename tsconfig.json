@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "noEmit": true,
+    "sourceMap": true,
+    "target": "es6",
+    "strict": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@Components/*": ["./src/components/*"],
+      "@Styles/*": ["./src/css/*"],
+      "@Types/*": ["./src/interfaces/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
