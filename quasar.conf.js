@@ -1,7 +1,10 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
-module.exports = function (ctx) {
+// eslint-disable-next-line @typescript-eslint/no-var-requires,no-undef
+const path = require('path');
+
+module.exports = function(ctx) {
   return {
     // Quasar looks for *.js files by default
     sourceFiles: {
@@ -11,15 +14,10 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
-    boot: [
-      'i18n',
-      'axios'
-    ],
+    boot: ['i18n', 'axios'],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
-    css: [
-      'app.scss'
-    ],
+    css: ['app.scss'],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
@@ -61,12 +59,15 @@ module.exports = function (ctx) {
         'QList',
         'QItem',
         'QItemSection',
-        'QItemLabel'
+        'QItemLabel',
+        'QInput',
+        'QSelect',
+        'QForm',
+        'QPopupProxy',
+        'QDate'
       ],
 
-      directives: [
-        'Ripple'
-      ],
+      directives: ['Ripple'],
 
       // Quasar plugins
       plugins: []
@@ -86,7 +87,7 @@ module.exports = function (ctx) {
       // extractCSS: false,
 
       // https://quasar.dev/quasar-cli/cli-documentation/handling-webpack
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         cfg.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
@@ -95,7 +96,16 @@ module.exports = function (ctx) {
           options: {
             formatter: require('eslint').CLIEngine.getFormatter('stylish')
           }
-        })
+        });
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias,
+          // eslint-disable-next-line no-undef
+          '@Components': path.resolve(__dirname, './src/components'),
+          // eslint-disable-next-line no-undef
+          '@Styles': path.resolve(__dirname, './src/css'),
+          // eslint-disable-next-line no-undef
+          '@Types': path.resolve(__dirname, './src/interfaces')
+        };
       }
     },
 
@@ -120,8 +130,8 @@ module.exports = function (ctx) {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        // name: 'Smart Movies App',
-        // short_name: 'Smart Movies App',
+        // name: 'Sota Tek Test App',
+        // short_name: 'Sota Tek Test App',
         // description: 'A Quasar Framework app',
         display: 'standalone',
         orientation: 'portrait',
@@ -129,29 +139,29 @@ module.exports = function (ctx) {
         theme_color: '#027be3',
         icons: [
           {
-            'src': 'statics/icons/icon-128x128.png',
-            'sizes': '128x128',
-            'type': 'image/png'
+            src: 'statics/icons/icon-128x128.png',
+            sizes: '128x128',
+            type: 'image/png'
           },
           {
-            'src': 'statics/icons/icon-192x192.png',
-            'sizes': '192x192',
-            'type': 'image/png'
+            src: 'statics/icons/icon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
           },
           {
-            'src': 'statics/icons/icon-256x256.png',
-            'sizes': '256x256',
-            'type': 'image/png'
+            src: 'statics/icons/icon-256x256.png',
+            sizes: '256x256',
+            type: 'image/png'
           },
           {
-            'src': 'statics/icons/icon-384x384.png',
-            'sizes': '384x384',
-            'type': 'image/png'
+            src: 'statics/icons/icon-384x384.png',
+            sizes: '384x384',
+            type: 'image/png'
           },
           {
-            'src': 'statics/icons/icon-512x512.png',
-            'sizes': '512x512',
-            'type': 'image/png'
+            src: 'statics/icons/icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
           }
         ]
       }
@@ -167,29 +177,26 @@ module.exports = function (ctx) {
     electron: {
       // bundler: 'builder', // or 'packager'
 
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         // do something with Electron main process Webpack cfg
         // chainWebpack also available besides this extendWebpack
       },
 
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
-
         // OS X / Mac App Store
         // appBundleId: '',
         // appCategoryType: '',
         // osxSign: '',
         // protocol: 'myapp://path',
-
         // Windows only
         // win32metadata: { ... }
       },
 
       builder: {
         // https://www.electron.build/configuration/configuration
-
-        // appId: 'smart-movies'
+        // appId: 'sota-tek-test'
       }
     }
-  }
-}
+  };
+};

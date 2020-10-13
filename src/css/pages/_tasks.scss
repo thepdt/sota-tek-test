@@ -1,0 +1,24 @@
+@mixin box-content {
+  padding: 25px 40px;
+  .title {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 40px;
+  }
+}
+
+.tasks-page {
+  .add-task-box {
+    .q-drawer {
+      border-right: solid 1px black;
+    }
+  }
+}
+
+.add-task-component {
+  @include box-content;
+}
+
+.task-list-component {
+  @include box-content;
+}
