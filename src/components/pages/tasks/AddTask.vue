@@ -3,21 +3,15 @@
     <div class="text-center title">
       New Task
     </div>
-    <task-detail ref="taskDetail" :taskInfo.sync="task" />
-    <q-btn
-      color="positive"
-      class="full-width q-mt-xl"
-      label="Add"
-      no-caps
-      unelevated
-      @click="addTask"
-    />
+    <task-detail ref="taskDetail" :taskInfo="task" @submit="submitAddTask" />
   </section>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import { Action } from 'vuex-class';
 import Task, { TaskInterface } from '@Types/pages/Task';
+import { uid } from 'quasar';
 
 @Component({
   components: {
@@ -28,12 +22,14 @@ export default class AddTask extends Vue {
   $refs!: {
     taskDetail: HTMLFormElement;
   };
+  @Action('task/addTask') addTask!: Function;
   public task: TaskInterface = new Task();
 
-  addTask() {
-    this.$refs.taskDetail.submitForm().then(async (success: boolean) => {
-      if (success) console.log(this.task);
-    });
+  public submitAddTask(task: TaskInterface) {
+    task.id = uid();
+    this.addTask(task);
+    this.task = new Task();
+    this.$refs.taskDetail.reset();
   }
 }
 </script>

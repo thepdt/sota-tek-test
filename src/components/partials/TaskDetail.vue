@@ -77,11 +77,19 @@
         />
       </div>
     </div>
+    <q-btn
+      color="positive"
+      class="full-width q-mt-xl"
+      :label="taskInfo.id ? 'Update' : 'Add'"
+      no-caps
+      unelevated
+      @click="submitForm"
+    />
   </q-form>
 </template>
 
 <script lang="ts">
-import { Vue, Component, PropSync } from 'vue-property-decorator';
+import { Vue, Component, PropSync, Prop, Watch } from 'vue-property-decorator';
 import { TaskInterface } from '@Types/pages/Task';
 import TaskPiority from 'src/mock-data/taskPiority';
 import moment from 'moment';
@@ -90,11 +98,10 @@ import moment from 'moment';
   components: {}
 })
 export default class TaskDetail extends Vue {
-  $refs!: {
-    taskDetailForm: HTMLFormElement;
-  };
+  $refs!: { taskDetailForm: HTMLFormElement };
 
-  @PropSync('taskInfo', { required: true }) task!: TaskInterface;
+  @Prop({ required: true }) taskInfo!: TaskInterface;
+
   public taskPiority = TaskPiority;
   public dateRules: any[] = [
     (val: any) =>
@@ -105,9 +112,24 @@ export default class TaskDetail extends Vue {
       moment(val).isAfter(moment().subtract(1, 'd')) ||
       'Please select a future date'
   ];
+  public task: TaskInterface = JSON.parse(JSON.stringify(this.taskInfo));
+  @Watch('taskInfo', { immediate: true })
+  updateProp(value: TaskInterface) {
+    console.log('updtae 2');
+
+    this.task = JSON.parse(JSON.stringify(value));
+  }
 
   submitForm() {
-    return this.$refs.taskDetailForm.validate();
+    this.$refs.taskDetailForm.validate().then(async (success: boolean) => {
+      if (success) {
+        this.$emit('submit', this.task);
+      }
+    });
+  }
+
+  reset() {
+    this.$refs.taskDetailForm.resetValidation();
   }
 }
 </script>

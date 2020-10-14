@@ -21,4 +21,27 @@
 
 .task-list-component {
   @include box-content;
+
+  .task-list {
+    margin-top: 24px;
+    .task-card {
+      margin-bottom: 24px;
+      border: 2px solid #aaaaaa;
+      &.active {
+        border: 2px solid var(--q-color-primary);
+      }
+      .card-header {
+        align-items: center;
+        .task-name {
+          font-size: 16px;
+        }
+      }
+      .action-btn {
+        padding-top: 0;
+        padding-bottom: 0;
+        height: 30px;
+        width: 90px;
+      }
+    }
+  }
 }
