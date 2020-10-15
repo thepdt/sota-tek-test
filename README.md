@@ -2,9 +2,14 @@
 
 Dinh Ton Thep
 
+## Environment
+
+Node v12.18.1
+
 ## Install the dependencies
 
 ```bash
+yarn global add @quasar/cli
 yarn
 ```
 
