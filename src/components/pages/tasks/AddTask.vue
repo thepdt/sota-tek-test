@@ -1,5 +1,15 @@
 <template>
   <section class="add-task-component">
+    <q-btn
+      color="black"
+      icon="close"
+      rounded
+      unelevated
+      flat
+      dense
+      class="absolute-top-right"
+      @click="showSidebar = false"
+    />
     <div class="text-center title">
       New Task
     </div>
@@ -8,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, PropSync } from 'vue-property-decorator';
 import { Action } from 'vuex-class';
 import Task, { TaskInterface } from '@Types/pages/Task';
 import { uid } from 'quasar';
@@ -22,6 +32,7 @@ export default class AddTask extends Vue {
   $refs!: {
     taskDetail: HTMLFormElement;
   };
+  @PropSync('isShowSidebar') showSidebar!: boolean;
   @Action('task/addTask') addTask!: Function;
   public task: TaskInterface = new Task();
 

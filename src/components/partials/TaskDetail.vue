@@ -115,8 +115,6 @@ export default class TaskDetail extends Vue {
   public task: TaskInterface = JSON.parse(JSON.stringify(this.taskInfo));
   @Watch('taskInfo', { immediate: true })
   updateProp(value: TaskInterface) {
-    console.log('updtae 2');
-
     this.task = JSON.parse(JSON.stringify(value));
   }
 

@@ -8,13 +8,13 @@
       show-if-above
       bordered
       :width="500"
-      :breakpoint="1000"
+      :breakpoint="1024"
     >
-      <add-task />
+      <add-task :isShowSidebar.sync="isShowSidebar" />
     </q-drawer>
     <q-page-container style="padding-top: 0">
       <q-page class="full-height">
-        <task-list />
+        <task-list :isShowSidebar.sync="isShowSidebar" />
       </q-page>
     </q-page-container>
   </q-layout>

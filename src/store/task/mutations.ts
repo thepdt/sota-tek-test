@@ -18,6 +18,13 @@ const mutations: MutationTree<ITask> = {
     LocalStorage.set('task_list', state.taskList);
   },
 
+  [taskTypes.REMOVE_MULTI_TASK](state, taskIdList: string[]) {
+    state.taskList = sortTaskByDate(
+      state.taskList.filter(task => !taskIdList.includes(task.id))
+    );
+    LocalStorage.set('task_list', state.taskList);
+  },
+
   [taskTypes.UPDATE_TASK](state, targetTask: TaskInterface) {
     const index = state.taskList.findIndex(task => task.id === targetTask.id);
     state.taskList[index] = targetTask;

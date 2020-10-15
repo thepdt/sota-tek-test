@@ -24,6 +24,15 @@ const actions: ActionTree<ITask, IRootState> = {
     }
   },
 
+  removeMultiTask({ commit }, taskIdList: string[]) {
+    try {
+      commit(taskTypes.REMOVE_MULTI_TASK, taskIdList);
+      showSuccess('Remove tasks success!');
+    } catch (error) {
+      showError('Remove tasks failed!');
+    }
+  },
+
   updateTask({ commit }, targetTask: TaskInterface) {
     try {
       commit(taskTypes.UPDATE_TASK, targetTask);
