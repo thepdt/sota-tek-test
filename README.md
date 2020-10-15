@@ -4,7 +4,9 @@ Dinh Ton Thep
 
 ## Environment
 
+```bash
 Node v12.18.1
+```
 
 ## Install the dependencies
 
