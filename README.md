@@ -1,6 +1,6 @@
 # Sota Tek Test App (sota-tek-test)
 
-A Quasar Framework app
+Dinh Ton Thep
 
 ## Install the dependencies
 
